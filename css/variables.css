@@ -1,0 +1,15 @@
+:root {
+    /* Fixed Syntax: Comments must be inside / * * / or removed from the value line */
+    --Light: #ffffff; 
+    --Light-1: #dbdbdb; 
+    --Light-2: #bfbfbf; 
+    --Dark-1: #8a8a8a; 
+    --Dark: #000000; 
+
+    --Background: #908e8e;
+    --Surface: #dbdbdb;
+    --Border: #bfbfbf;
+    
+    /* Board Dimensions */
+    --Square-Size: 60px;
+}

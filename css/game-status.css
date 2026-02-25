@@ -1,0 +1,33 @@
+#gameStatus {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            background-color: var(--Light-1);
+        }
+        #reset-btn{
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: var(--Dark);
+            color: var(--Light);
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+        #change-img{
+ padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color:var(--Dark) ;
+    color: var(--Light);
+    border:none;
+    border-radius: 5px;
+     margin-left: 10px;
+}
+#change-img:hover,#reset-btn:hover {
+    background-color: var(--Dark-1);
+
+
+}

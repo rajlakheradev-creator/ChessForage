@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEME-CHESS</title>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/board.css">
+    <link rel="stylesheet" href="css/game-status.css">
+    <link rel="stylesheet" href="css/asset-modal.css">
+    <link rel="stylesheet" href="css/move-history.css">
+    <link rel="stylesheet" href="css/bot-panel.css">
+</head>
+
+<body>
+    <h2>Custom Meme Chess</h2>
+
+    <div class="controls">
+        <button id="change-img" type="button">🎨 Customize Pieces</button>
+        <button id="toggle-style-btn" type="button">Switch to Unicode</button>
+        <button id="reset-btn" type="button">Reset Game</button>
+        <button id="sound-toggle-btn" type="button">🔊 Sound ON</button>
+        <input type="range" id="volume-slider" min="0" max="100" value="50" title="Volume">
+    </div>
+ <!-- bot panel here -->
+    <!--
+        .game-container is moved into #game-wrapper by move-history.js
+        so the sidebar and board sit side by side automatically.
+    -->
+    <div class="game-container">
+        <div id="gameStatus">White to move</div>
+        <div class="board" id="board"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

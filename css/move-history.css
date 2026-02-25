@@ -1,0 +1,230 @@
+/* css/move-history.css */
+
+/* ============================================================
+   WRAPPER — puts sidebar + board side by side
+   ============================================================ */
+#game-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* ============================================================
+   SIDEBAR CONTAINER
+   ============================================================ */
+#move-sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    /* Match board height: 8 squares × 60px + border */
+    height: calc(8 * var(--Square-Size) + 10px);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    margin-top: 80px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: #111;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ccc;
+    flex-shrink: 0;
+}
+
+#move-count {
+    font-size: 11px;
+    color: #777;
+    font-weight: normal;
+}
+
+/* ============================================================
+   MOVE LIST — scrollable area
+   ============================================================ */
+#move-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 6px 4px;
+    scrollbar-width: thin;
+    scrollbar-color: #444 #1a1a1a;
+}
+
+#move-list::-webkit-scrollbar { width: 5px; }
+#move-list::-webkit-scrollbar-track { background: #1a1a1a; }
+#move-list::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+
+.move-list-empty {
+    color: #555;
+    font-size: 12px;
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* ============================================================
+   MOVE ROWS — one row = white move + black move
+   ============================================================ */
+.move-row {
+    display: grid;
+    /* 3 columns: number | white move | black move */
+    grid-template-columns: 24px 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 2px;
+    align-items: stretch;
+}
+
+.move-num {
+    color: #555;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    padding-left: 4px;
+}
+
+/* ============================================================
+   MOVE CELLS — individual clickable move entries
+   ============================================================ */
+.move-cell {
+    padding: 5px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    transition: background 0.15s;
+    flex-wrap: wrap;
+    min-height: 28px;
+}
+
+.white-move {
+    background: #2a2a2a;
+    color: #ddd;
+}
+
+.black-move {
+    background: #222;
+    color: #bbb;
+}
+
+.move-cell:hover {
+    background: #3a3a3a !important;
+}
+
+/* Active/selected move during replay */
+.active-move {
+    background: #1a3a5a !important;
+    border: 1px solid #4a8abf;
+    color: #fff !important;
+}
+
+/* ============================================================
+   MOVE CELL CONTENTS
+   ============================================================ */
+.move-symbol {
+    font-size: 14px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.move-san {
+    font-weight: bold;
+    font-size: 12px;
+    color: inherit;
+}
+
+.move-squares {
+    font-size: 9px;
+    color: #666;
+    font-family: monospace;
+}
+
+.captured-piece {
+    font-size: 10px;
+    color: #e05555;
+    margin-left: auto;
+}
+
+/* ============================================================
+   BADGES for special moves
+   ============================================================ */
+.move-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.move-badge.castle { background: #2a4a2a; color: #88cc88; }
+.move-badge.ep     { background: #4a3a1a; color: #ccaa55; }
+.move-badge.promo  { background: #3a2a4a; color: #aa88cc; }
+
+/* ============================================================
+   FOOTER NAVIGATION BUTTONS
+   ============================================================ */
+.sidebar-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-top: 1px solid #333;
+    background: #111;
+    flex-shrink: 0;
+    gap: 4px;
+}
+
+.sidebar-footer button {
+    flex: 1;
+    background: #2a2a2a;
+    color: #ccc;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 5px 2px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.15s;
+}
+
+.sidebar-footer button:hover {
+    background: #444;
+    color: #fff;
+}
+
+#sidebar-live-btn {
+    background: #1a3a1a;
+    color: #88cc88;
+    border-color: #2a5a2a;
+    flex: 2;
+}
+
+#sidebar-live-btn:hover {
+    background: #2a5a2a;
+}
+
+/* ============================================================
+   RESPONSIVE — stack vertically on small screens
+   ============================================================ */
+@media (max-width: 640px) {
+    #game-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #move-sidebar {
+        width: 100%;
+        min-width: unset;
+        height: 200px;
+    }
+}

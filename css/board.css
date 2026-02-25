@@ -1,0 +1,83 @@
+/* ==========================================
+   BOARD - Chess Board & Squares
+   ========================================== */
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, var(--Square-Size));
+    grid-template-rows: repeat(8, var(--Square-Size));
+    gap: 0;
+    border: 5px solid var(--Dark);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.square {
+    width: var(--Square-Size);
+    height: var(--Square-Size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px; 
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.square img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s;
+}
+
+.square img:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+    z-index: 100;
+    position: relative;
+}
+
+.square span {
+    font-size: 45px;
+    line-height: 45px;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    color: black;
+}
+
+/* Square Colors */
+.white {
+    background-color: var(--Light);
+}
+
+.black {
+    background-color: var(--Dark-1);
+}
+
+/* Interaction States */
+.selected {
+    background-color: #90EE90 !important;
+    box-shadow: inset 0 0 0 3px #228B22;
+}
+
+.valid-move {
+    background-color: #FFD700 !important;
+    opacity: 0.8;
+}
+
+.valid-move::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(0, 128, 0, 0.5);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
