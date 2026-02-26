@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Login to ChessForge to access your chess games, puzzles, and training tools.">
-
     <title>Login | ChessForge</title>
     <link rel="stylesheet" href="css/auth.css">
 </head>
@@ -15,8 +14,9 @@
     <h2>Login</h2>
 
     <form id="loginForm">
-        <input type="email" id="email" placeholder="Email" required />
-<input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+<input type="email" id="email" placeholder="Email" autocomplete="username" required>
+
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
         <button type="submit">Login</button>
     </form>
 
@@ -25,6 +25,7 @@
     </p>
 </div>
 
- <script src="js/login.js"></script>
-<!-- signup.html --> <script src="js/signup.js"></script></body>
+<!-- FIX: removed signup.js — it doesn't belong on the login page -->
+<script src="js/login.js"></script>
+</body>
 </html>

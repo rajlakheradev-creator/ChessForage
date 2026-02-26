@@ -1,3 +1,5 @@
+// js/login.js
+
 async function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
@@ -10,11 +12,15 @@ async function login() {
 
     const data = await res.json();
 
-    localStorage.setItem("token", data.token);
-    window.location.href = "index.html";
+    if (res.ok) {
+        localStorage.setItem("token", data.token);
+        window.location.href = "index.html";
+    } else {
+        // FIX: show error instead of silently failing or crashing
+        alert(data.message || "Login failed");
+    }
 }
 
-// login.js
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     login();

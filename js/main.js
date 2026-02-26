@@ -4,6 +4,7 @@ import { updateGameStatus } from './game-control.js';
 import { setupEventListeners } from './ui-handlers.js';
 import { buildModal } from './asset-modal.js';
 import { buildSidebar } from './move-history.js';
+import { game } from './config.js';
 
 const token = localStorage.getItem("token");
 

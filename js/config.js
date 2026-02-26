@@ -1,5 +1,7 @@
 // js/config.js
+
 export const game = new Chess();
+
 
 export const state = {
     uploadedImageURL: null,

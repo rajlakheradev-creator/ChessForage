@@ -1,7 +1,9 @@
+// js/signup.js
+
 async function signup() {
     const name = document.getElementById("name").value;
-    const email =document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("Password").value;
 
     const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
@@ -11,10 +13,14 @@ async function signup() {
 
     const data = await res.json();
     alert(data.message);
+
+    if (res.ok) {
+        window.location.href = "login.html";
+    }
 }
-// login.js
+
+// FIX: was calling signupForm() which doesn't exist — function is named signup()
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    // ... your existing fetch logic
-    signupForm();
+    signup();
 });

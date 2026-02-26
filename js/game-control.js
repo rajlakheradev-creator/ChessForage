@@ -8,11 +8,9 @@ import { getBestMove } from './bot.js';
 export function handleBoardClick(e) {
 
     // BLOCK INPUT while bot is thinking
-    // Without this the human could move while the bot is mid-calculation
     if (state.botThinking) return;
 
     // BLOCK INPUT if it's the bot's turn
-    // e.g. if bot plays black and it's black's turn, human can't move
     if (state.botMode === 'bot-black' && game.turn() === 'b') return;
     if (state.botMode === 'bot-white' && game.turn() === 'w') return;
 
@@ -55,7 +53,6 @@ export function handleBoardClick(e) {
             updateBoard();
             updateGameStatus();
 
-            // After human moves, trigger bot if game isn't over
             if (!game.game_over()) {
                 triggerBotMove();
             }
@@ -70,16 +67,8 @@ export function handleBoardClick(e) {
 // ============================================================
 // triggerBotMove()
 // Runs AFTER the human makes a move.
-// Uses setTimeout(..., 300) so the board visually updates first
-// before the bot "thinks" — otherwise the UI freezes mid-move.
-//
-// Why setTimeout?
-// JS is single-threaded. If we called getBestMove() directly,
-// the browser can't repaint until the function returns.
-// A small delay lets the browser render the human's move first.
 // ============================================================
 export function triggerBotMove() {
-    // Check if bot should play in the current position
     const isBotTurn =
         (state.botMode === 'bot-black' && game.turn() === 'b') ||
         (state.botMode === 'bot-white' && game.turn() === 'w');
@@ -87,23 +76,34 @@ export function triggerBotMove() {
     if (!isBotTurn || state.botMode === 'none') return;
 
     state.botThinking = true;
-    updateGameStatus(); // shows "Bot is thinking..."
+    updateGameStatus();
 
-    // Small delay: lets browser repaint human's move before bot calculates
     setTimeout(() => {
+        // getBestMove returns a verbose move object when called from bot.js
         const bestMove = getBestMove(state.botDepth);
 
         if (bestMove) {
-            const movingPiece = game.get(
-                typeof bestMove === 'string'
-                    ? bestMove.substring(0, 2)  // SAN string like "e4"
-                    : bestMove.from             // verbose move object
-            );
+            // FIX: getBestMove can return either a SAN string or verbose object.
+            // game.moves() returns SAN strings by default, so we use verbose:true
+            // in bot.js — but guard both cases safely here.
+            let fromSquare = null;
 
+            if (typeof bestMove === 'object' && bestMove.from) {
+                // Verbose move object: { from: 'e2', to: 'e4', ... }
+                fromSquare = bestMove.from;
+            } else if (typeof bestMove === 'string' && bestMove.length >= 2) {
+                // FIX: SAN string like "Nf3" — find the move via verbose lookup
+                // instead of naively slicing, which breaks for multi-char moves
+                const verboseMoves = game.moves({ verbose: true });
+                const matched = verboseMoves.find(m => m.san === bestMove);
+                fromSquare = matched ? matched.from : null;
+            }
+
+            const movingPiece = fromSquare ? game.get(fromSquare) : null;
             const move = game.move(bestMove);
 
             if (move) {
-                handleMoveSound(move, movingPiece || { type: 'p' });
+                handleMoveSound(move, movingPiece || { type: move.piece });
                 recordMove(move);
             }
         }
@@ -145,7 +145,6 @@ export function updateGameStatus() {
     let status = '';
     let color = '#dbdbdb';
 
-    // Show "thinking" indicator while bot calculates
     if (state.botThinking) {
         elements.gameStatus.textContent = '🤖 Bot is thinking...';
         elements.gameStatus.style.backgroundColor = '#e8f0ff';
@@ -184,7 +183,6 @@ export function resetGame() {
     updateBoard();
     updateGameStatus();
 
-    // If bot plays white, it should move first after reset
     if (state.botMode === 'bot-white') {
         triggerBotMove();
     }
