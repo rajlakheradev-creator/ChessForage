@@ -7,9 +7,28 @@ import { buildSidebar } from './move-history.js';
 import { game } from './config.js';
 
 const token = localStorage.getItem("token");
-
+const userName = localStorage.getItem("userName") || "Player"; // Get the saved name
 if (!token) {
     window.location.href = "login.html";
+}
+
+// 1. Display the logged-in user's name
+const welcomeSpan = document.getElementById("welcome-message");
+if (welcomeSpan) {
+    welcomeSpan.textContent = `Welcome, ${userName}!`;
+}
+
+// 2. Handle Logout
+const logoutBtn = document.getElementById("logout-btn");
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+        // Clear the saved data
+        localStorage.removeItem("token");
+        localStorage.removeItem("userName");
+        
+        // Redirect back to login
+        window.location.href = "login.html";
+    });
 }
 // Order matters:
 // 1. Build sidebar first (inserts into DOM before game container)
