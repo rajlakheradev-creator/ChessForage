@@ -297,7 +297,7 @@ path: ^0.12.7
 │   ├── layout.css
 │   ├── move-history.css
 │   └── variables.css
-├── index.html
+├── Index.html
 ├── js
 │   ├── asset-modal.js
 │   ├── board.js
