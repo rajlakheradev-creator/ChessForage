@@ -1,48 +1,40 @@
-// js/main.js
+// public/js/index.js
+import { Chess } from 'https://cdn.jsdelivr.net/npm/chess.js@1.4.0/+esm';
 import { createBoard } from './board.js';
 import { updateGameStatus } from './game-control.js';
 import { setupEventListeners } from './ui-handlers.js';
 import { buildModal } from './asset-modal.js';
 import { buildSidebar } from './move-history.js';
-import { game } from './config.js';
 
-
+// ── Auth guard ───────────────────────────────────────────────
 const token = localStorage.getItem("token");
-const userName = localStorage.getItem("userName") || "Player"; // Get the saved name
 if (!token) {
     window.location.href = "login.html";
 }
 
-// 1. Display the logged-in user's name
+const userName = localStorage.getItem("userName") || "Player";
 const welcomeSpan = document.getElementById("welcome-message");
 if (welcomeSpan) {
     welcomeSpan.textContent = `Welcome, ${userName}!`;
 }
 
-// 2. Handle Logout
 const logoutBtn = document.getElementById("logout-btn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-        // Clear the saved data
         localStorage.removeItem("token");
         localStorage.removeItem("userName");
-        
-        // Redirect back to login
         window.location.href = "login.html";
     });
 }
-// Order matters:
-// 1. Build sidebar first (inserts into DOM before game container)
-buildSidebar();
 
-// 2. Build piece customizer modal
-buildModal();
+// ── Export Chess instance for other modules ──────────────────
+// We attach it to window so config.js can pick it up as a global,
+// keeping all other files unchanged.
+window.Chess = Chess;
 
-// 3. Render the chess board
-createBoard();
-
-// 4. Set initial status
-updateGameStatus();
-
-// 5. Attach all event listeners
-setupEventListeners();
+// ── Boot order matters ───────────────────────────────────────
+buildSidebar();   // 1. sidebar (must exist before board)
+buildModal();     // 2. piece customizer modal
+createBoard();    // 3. render the chess board
+updateGameStatus(); // 4. set initial status text
+setupEventListeners(); // 5. attach all click/input handlers

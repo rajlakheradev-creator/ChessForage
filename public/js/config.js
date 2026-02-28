@@ -1,9 +1,9 @@
 // public/js/config.js
-// Chess() comes from the CDN script tag in game.html as a global variable.
-// We cannot use require() in the browser — that's Node.js only.
+// Chess is imported as ESM in index.js and set on window.Chess so all
+// modules can access it. We cannot use require() — that's Node.js only.
 
 if (typeof Chess === 'undefined') {
-    throw new Error('chess.js failed to load. Check the CDN script tag in game.html.');
+    throw new Error('Chess is not defined — index.js must import chess.js before this runs.');
 }
 
 export const game = new Chess();

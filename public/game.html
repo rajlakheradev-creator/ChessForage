@@ -36,12 +36,9 @@
     </div>
 
     <!--
-        IMPORTANT: chess.js MUST be a plain <script> (no type="module") so it
-        loads as a global window.Chess before index.js runs.
-        index.js is type="module" so it is always deferred — chess.js will
-        always be ready by the time module code executes.
+        chess.js is now imported as an ES module inside index.js via jsDelivr ESM.
+        No separate script tag needed — eliminates the require() error.
     -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>
 </html>
