@@ -30,17 +30,17 @@
         <input type="range" id="volume-slider" min="0" max="100" value="50" title="Volume">
     </div>
 
-    <!-- Bot panel is injected here by ui-handlers.js → buildBotPanel() -->
-
-    <!--
-        #game-wrapper (flex row: sidebar + board) is built by move-history.js → buildSidebar()
-        .game-container is moved inside it automatically.
-    -->
     <div class="game-container">
         <div id="gameStatus">White to move</div>
         <div class="board" id="board"></div>
     </div>
 
+    <!--
+        IMPORTANT: chess.js MUST be a plain <script> (no type="module") so it
+        loads as a global window.Chess before index.js runs.
+        index.js is type="module" so it is always deferred — chess.js will
+        always be ready by the time module code executes.
+    -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>

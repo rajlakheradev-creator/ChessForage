@@ -1,7 +1,12 @@
-// js/config.js
+// public/js/config.js
+// Chess() comes from the CDN script tag in game.html as a global variable.
+// We cannot use require() in the browser — that's Node.js only.
+
+if (typeof Chess === 'undefined') {
+    throw new Error('chess.js failed to load. Check the CDN script tag in game.html.');
+}
 
 export const game = new Chess();
-
 
 export const state = {
     uploadedImageURL: null,
@@ -12,8 +17,8 @@ export const state = {
     // Bot settings
     // botMode: 'none' | 'bot-black' | 'bot-white'
     botMode: 'none',
-    botDepth: 3,         // how many moves ahead (1=easy, 2=medium, 3=hard)
-    botThinking: false,  // true while bot is calculating — blocks human input
+    botDepth: 3,
+    botThinking: false,
 };
 
 export const elements = {
