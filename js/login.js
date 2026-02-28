@@ -19,7 +19,7 @@ async function login() {
     if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("userName", data.name);
-        window.location.href = "index.html";
+        window.location.href = "game.html";
     } else {
         // FIX: show error instead of silently failing or crashing
         alert(data.message || "Login failed");
