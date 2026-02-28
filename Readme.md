@@ -39,7 +39,7 @@ path: ^0.12.7
 
 ```
 .
-├── Images
+├── images
 │   ├── ashish.jpg
 │   ├── bb.jpg
 │   ├── bk.jpg
