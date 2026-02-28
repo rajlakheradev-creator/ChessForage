@@ -32,7 +32,7 @@ app.use(express.static(__dirname));
 
 // Serve the game page
 app.get('/game', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'game.html'));
 });
 
 // Fallback: Send login page for root URL
