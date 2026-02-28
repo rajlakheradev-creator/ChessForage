@@ -13,7 +13,7 @@
     { "src": "/Images/(.*)", "dest": "/Images/$1" },
     { "src": "/assets/(.*)", "dest": "/assets/$1" },
     { "src": "/signup", "dest": "/signup.html" },
-    { "src": "/game", "dest": "/index.html" },
+    { "src": "/game", "dest": "/game.html" },
     { "src": "/", "dest": "/login.html" }
   ]
 }
