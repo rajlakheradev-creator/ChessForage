@@ -1,4 +1,4 @@
-// server.js (Move this to the root of your project)
+// server.js
 const express = require('express');
 const mongoose = require("mongoose");
 const path = require('path');
@@ -6,8 +6,8 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const authRoutes = require("./routes/auth"); // Ensure auth.js is in a 'routes' folder
-const authMiddleware = require("./middleware/authMiddleware"); 
+const authRoutes = require("./routes/auth");
+const authMiddleware = require("./middleware/authMiddleware");
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
@@ -21,17 +21,15 @@ mongoose.connect(process.env.MONGO_URI)
 // Auth routes
 app.use("/api/auth", authRoutes);
 
-// Example of how to properly use authMiddleware (protecting data, not HTML)
+// Protected profile route
 app.get("/api/user/profile", authMiddleware, (req, res) => {
     res.json({ message: "This is protected data!", userId: req.user.id });
 });
 
-// Serve sounds and other static assets
-app.use('/sounds', express.static(path.join(__dirname, 'sounds')));
-// Remove: app.use(express.static(__dirname));
-// Add this:
+// Serve all static files from /public (includes /assets, /css, /js, images)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Page routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
@@ -39,19 +37,14 @@ app.get('/', (req, res) => {
 app.get('/game', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'game.html'));
 });
-// Serve the game page
-app.get('/game', (req, res) => {
-    res.sendFile(path.join(__dirname, 'game.html'));
-});
 
-// Fallback: Send login page for root URL
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login.html'));
+// Catch-all: redirect unknown routes to login
+app.get('*', (req, res) => {
+    res.redirect('/');
 });
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
 
-// At the bottom of server.js
 module.exports = app;

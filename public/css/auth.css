@@ -1,3 +1,4 @@
+/* public/css/auth.css */
 body {
     margin: 0;
     height: 100vh;
@@ -17,31 +18,110 @@ body {
     text-align: center;
 }
 
+h1 {
+    margin: 0 0 4px;
+    font-size: 28px;
+}
+
+h2 {
+    margin: 0 0 24px;
+    font-size: 18px;
+    color: #aaa;
+    font-weight: normal;
+}
+
+/* Screen-reader only labels (hidden visually but accessible) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 input {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 8px 0;
     border-radius: 6px;
-    border: none;
+    border: 1px solid #333;
+    background: #2a2a2a;
+    color: white;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
 }
 
-button {
+input:focus {
+    outline: none;
+    border-color: #ff6b00;
+}
+
+input::placeholder {
+    color: #666;
+}
+
+button[type="submit"] {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
+    margin-top: 12px;
     background: #ff6b00;
     border: none;
     border-radius: 6px;
     color: white;
     font-weight: bold;
+    font-size: 15px;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
-button:hover {
+button[type="submit"]:hover {
     background: #ff8800;
+}
+
+button[type="submit"]:disabled {
+    background: #884400;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Message banners */
+.message {
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.error-message {
+    background: #3a1010;
+    border: 1px solid #7a2020;
+    color: #ff9999;
+}
+
+.success-message {
+    background: #0e2e1a;
+    border: 1px solid #1a6a35;
+    color: #66dd99;
 }
 
 a {
     color: #ff6b00;
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #888;
 }
