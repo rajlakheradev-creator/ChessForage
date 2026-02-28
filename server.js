@@ -28,8 +28,17 @@ app.get("/api/user/profile", authMiddleware, (req, res) => {
 
 // Serve sounds and other static assets
 app.use('/sounds', express.static(path.join(__dirname, 'sounds')));
-app.use(express.static(__dirname));
+// Remove: app.use(express.static(__dirname));
+// Add this:
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+});
+
+app.get('/game', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'game.html'));
+});
 // Serve the game page
 app.get('/game', (req, res) => {
     res.sendFile(path.join(__dirname, 'game.html'));
