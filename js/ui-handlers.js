@@ -15,12 +15,12 @@ export function setupEventListeners() {
     // Piece customizer modal
     elements.changeImgBtn.addEventListener('click', openModal);
 
-    // Toggle Unicode / Images
+    // Toggle Unicode / images
     elements.toggleStyleBtn.addEventListener('click', () => {
         state.useImageAssets = !state.useImageAssets;
         elements.toggleStyleBtn.textContent = state.useImageAssets
             ? 'Switch to Unicode'
-            : 'Switch to Images';
+            : 'Switch to images';
         updateBoard();
     });
 
