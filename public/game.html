@@ -36,9 +36,11 @@
     </div>
 
     <!--
-        chess.js is now imported as an ES module inside index.js via jsDelivr ESM.
-        No separate script tag needed — eliminates the require() error.
+        chess.js loaded as a plain <script> so it becomes window.Chess globally.
+        Served from node_modules via the /vendor/chess.js route in server.js.
+        Must NOT be type="module" — that would scope it and break window.Chess.
     -->
+    <script src="/vendor/chess.js"></script>
     <script type="module" src="js/index.js"></script>
 </body>
 </html>

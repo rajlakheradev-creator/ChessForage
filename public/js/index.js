@@ -1,5 +1,8 @@
 // public/js/index.js
-import { Chess } from 'https://cdn.jsdelivr.net/npm/chess.js@1.4.0/+esm';
+// Chess() is loaded as a global from the <script> tag in game.html
+// which points to our locally-served chess.js copy.
+// We do NOT import it here — browser globals don't need importing.
+
 import { createBoard } from './board.js';
 import { updateGameStatus } from './game-control.js';
 import { setupEventListeners } from './ui-handlers.js';
@@ -27,14 +30,9 @@ if (logoutBtn) {
     });
 }
 
-// ── Export Chess instance for other modules ──────────────────
-// We attach it to window so config.js can pick it up as a global,
-// keeping all other files unchanged.
-window.Chess = Chess;
-
-// ── Boot order matters ───────────────────────────────────────
-buildSidebar();   // 1. sidebar (must exist before board)
-buildModal();     // 2. piece customizer modal
-createBoard();    // 3. render the chess board
-updateGameStatus(); // 4. set initial status text
-setupEventListeners(); // 5. attach all click/input handlers
+// ── Boot ─────────────────────────────────────────────────────
+buildSidebar();
+buildModal();
+createBoard();
+updateGameStatus();
+setupEventListeners();
