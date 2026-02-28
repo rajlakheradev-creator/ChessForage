@@ -7,13 +7,6 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "server.js" },
-    { "src": "/js/(.*)", "dest": "/js/$1" },
-    { "src": "/css/(.*)", "dest": "/css/$1" },
-{ "src": "/images/(.*)", "dest": "/images/$1" },
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
-    { "src": "/signup", "dest": "/signup.html" },
-    { "src": "/game", "dest": "/index.html" },
-    { "src": "/(.*)", "dest": "/login.html" }
+    { "src": "/(.*)", "dest": "server.js" }
   ]
 }
