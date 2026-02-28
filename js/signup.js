@@ -1,11 +1,16 @@
 // js/signup.js
 
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_BASE_URL = isLocal 
+? "http://localhost:5000" 
+: "https://chess-forage.vercel.app/";
+
 async function signup() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("Password").value;
 
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
+    const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password })
@@ -17,6 +22,8 @@ async function signup() {
     if (res.ok) {
         window.location.href = "login.html";
     }
+
+
 }
 
 // FIX: was calling signupForm() which doesn't exist — function is named signup()

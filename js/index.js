@@ -6,6 +6,7 @@ import { buildModal } from './asset-modal.js';
 import { buildSidebar } from './move-history.js';
 import { game } from './config.js';
 
+
 const token = localStorage.getItem("token");
 const userName = localStorage.getItem("userName") || "Player"; // Get the saved name
 if (!token) {
