@@ -3,12 +3,18 @@
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE_URL = isLocal 
 ? "http://localhost:5000" 
-: "https://chess-forage.vercel.app/";
+: "https://chess-forage.vercel.app";
 
 async function signup() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
-    const password = document.getElementById("Password").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
 
     const res = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
