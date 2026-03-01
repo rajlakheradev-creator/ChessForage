@@ -6,11 +6,7 @@ import { recordMove, clearHistory } from './move-history.js';
 import { getBestMove } from './bot.js';
 
 export function handleBoardClick(e) {
-
-    // BLOCK INPUT while bot is thinking
     if (state.botThinking) return;
-
-    // BLOCK INPUT if it's the bot's turn
     if (state.botMode === 'bot-black' && game.turn() === 'b') return;
     if (state.botMode === 'bot-white' && game.turn() === 'w') return;
 
@@ -20,12 +16,10 @@ export function handleBoardClick(e) {
     const squareNotation = squareDiv.dataset.square;
     const piece = game.get(squareNotation);
 
-    // Reset highlights
     document.querySelectorAll('.square').forEach(sq => {
         sq.classList.remove('selected', 'valid-move');
     });
 
-    // Select or move
     if (!state.selectedSquare || (piece && piece.color === game.turn())) {
         if (piece && piece.color === game.turn()) {
             state.selectedSquare = squareNotation;
@@ -53,7 +47,7 @@ export function handleBoardClick(e) {
             updateBoard();
             updateGameStatus();
 
-            if (!game.game_over()) {
+            if (!game.isGameOver()) {
                 triggerBotMove();
             }
         } else {
@@ -64,10 +58,6 @@ export function handleBoardClick(e) {
     }
 }
 
-// ============================================================
-// triggerBotMove()
-// Runs AFTER the human makes a move.
-// ============================================================
 export function triggerBotMove() {
     const isBotTurn =
         (state.botMode === 'bot-black' && game.turn() === 'b') ||
@@ -79,21 +69,14 @@ export function triggerBotMove() {
     updateGameStatus();
 
     setTimeout(() => {
-        // getBestMove returns a verbose move object when called from bot.js
         const bestMove = getBestMove(state.botDepth);
 
         if (bestMove) {
-            // FIX: getBestMove can return either a SAN string or verbose object.
-            // game.moves() returns SAN strings by default, so we use verbose:true
-            // in bot.js — but guard both cases safely here.
             let fromSquare = null;
 
             if (typeof bestMove === 'object' && bestMove.from) {
-                // Verbose move object: { from: 'e2', to: 'e4', ... }
                 fromSquare = bestMove.from;
-            } else if (typeof bestMove === 'string' && bestMove.length >= 2) {
-                // FIX: SAN string like "Nf3" — find the move via verbose lookup
-                // instead of naively slicing, which breaks for multi-char moves
+            } else if (typeof bestMove === 'string') {
                 const verboseMoves = game.moves({ verbose: true });
                 const matched = verboseMoves.find(m => m.san === bestMove);
                 fromSquare = matched ? matched.from : null;
@@ -151,15 +134,20 @@ export function updateGameStatus() {
         return;
     }
 
-    if (game.in_checkmate()) {
+    // chess.js v1.x API — old methods renamed:
+    // in_checkmate() → isCheckmate()
+    // in_draw()      → isDraw()
+    // in_check()     → inCheck()
+    // game_over()    → isGameOver()
+    if (game.isCheckmate()) {
         status = `Checkmate! ${game.turn() === 'w' ? 'Black' : 'White'} wins!`;
         color = '#ffcccc';
         soundSystem.playCheckmate(game.turn() === 'b');
-    } else if (game.in_draw()) {
+    } else if (game.isDraw()) {
         status = 'Draw!';
         color = '#ffffcc';
         soundSystem.playDraw();
-    } else if (game.in_check()) {
+    } else if (game.inCheck()) {
         status = `${game.turn() === 'w' ? 'White' : 'Black'} is in check!`;
         color = '#ffeeaa';
         soundSystem.playCheck();

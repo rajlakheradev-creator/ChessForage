@@ -36,11 +36,45 @@
     </div>
 
     <!--
-        chess.js loaded as a plain <script> so it becomes window.Chess globally.
-        Served from node_modules via the /vendor/chess.js route in server.js.
-        Must NOT be type="module" — that would scope it and break window.Chess.
+        Step 1: Load chess.js as a module, set window.Chess, then load app.
+        Using an inline module ensures Chess is set before index.js runs,
+        since all type="module" scripts are deferred and run in DOM order.
     -->
-    <script src="/vendor/chess.js"></script>
-    <script type="module" src="js/index.js"></script>
+    <script type="module">
+        import { Chess } from '/vendor/chess.js';
+        window.Chess = Chess;
+        // Dynamically import the app AFTER Chess is set on window
+        const { createBoard } = await import('./js/board.js');
+        const { updateGameStatus } = await import('./js/game-control.js');
+        const { setupEventListeners } = await import('./js/ui-handlers.js');
+        const { buildModal } = await import('./js/asset-modal.js');
+        const { buildSidebar } = await import('./js/move-history.js');
+
+        // Auth guard
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+        const userName = localStorage.getItem("userName") || "Player";
+        const welcomeSpan = document.getElementById("welcome-message");
+        if (welcomeSpan) welcomeSpan.textContent = `Welcome, ${userName}!`;
+
+        const logoutBtn = document.getElementById("logout-btn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", () => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("userName");
+                window.location.href = "login.html";
+            });
+        }
+
+        // Boot
+        buildSidebar();
+        buildModal();
+        createBoard();
+        updateGameStatus();
+        setupEventListeners();
+    </script>
 </body>
 </html>

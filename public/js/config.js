@@ -1,10 +1,6 @@
 // public/js/config.js
-// Chess is imported as ESM in index.js and set on window.Chess so all
-// modules can access it. We cannot use require() — that's Node.js only.
-
-if (typeof Chess === 'undefined') {
-    throw new Error('Chess is not defined — index.js must import chess.js before this runs.');
-}
+// Chess is set on window by the inline module in game.html
+// before any of these modules are imported.
 
 export const game = new Chess();
 
@@ -13,10 +9,7 @@ export const state = {
     selectedSquare: null,
     useImageAssets: true,
     pieceTypeImages: {},
-
-    // Bot settings
-    // botMode: 'none' | 'bot-black' | 'bot-white'
-    botMode: 'none',
+    botMode: 'none',   // 'none' | 'bot-black' | 'bot-white'
     botDepth: 3,
     botThinking: false,
 };
