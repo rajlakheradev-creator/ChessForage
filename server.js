@@ -56,10 +56,10 @@ app.get('*path', (req, res) => {
 });
 
 
-// At the bottom of server.js
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
-}
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
+
 
 
 

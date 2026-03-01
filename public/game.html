@@ -41,7 +41,7 @@
         since all type="module" scripts are deferred and run in DOM order.
     -->
     <script type="module">
-        import { Chess } from '/vendor/chess.js';
+        import { Chess } from "/vendor/chess.js";
         window.Chess = Chess;
         // Dynamically import the app AFTER Chess is set on window
         const { createBoard } = await import('./js/board.js');
