@@ -2,7 +2,7 @@
 const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_BASE_URL = isLocal
     ? "http://localhost:5000"
-    : "https://chess-forage.vercel.app";
+    : "https://chessforage.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("loginForm");
