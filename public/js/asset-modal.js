@@ -60,7 +60,7 @@ export function buildModal() {
     header.innerHTML = `
         <h3>🎨 Customize Pieces</h3>
         <p>Upload an image or GIF for any piece. Supports .jpg .png .gif .webp</p>
-        <button id="modal-close-btn">✕</button>
+        <button id="modal-close-btn">X</button>
     `;
 
     // --- Grid of piece slots ---

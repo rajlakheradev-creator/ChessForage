@@ -1,12 +1,12 @@
 :root {
     /* Fixed Syntax: Comments must be inside / * * / or removed from the value line */
-    --Light: #ffffff; 
+    --Light: #f0d9b5;
     --Light-1: #dbdbdb; 
     --Light-2: #bfbfbf; 
-    --Dark-1: #8a8a8a; 
+    --Dark-1: #b58863;
     --Dark: #000000; 
 
-    --Background: #908e8e;
+    --Background: #1a1a2e;
     --Surface: #dbdbdb;
     --Border: #bfbfbf;
     

@@ -13,8 +13,13 @@ export function setupEventListeners() {
     });
 
     // Piece customizer modal
-    elements.changeImgBtn.addEventListener('click', openModal);
-
+// AFTER (fixed)
+elements.changeImgBtn.addEventListener('click', () => {
+    const overlay = document.getElementById('asset-overlay');
+    if (overlay) {
+        overlay.classList.add('open');
+    }
+});
     // Toggle Unicode / images
     elements.toggleStyleBtn.addEventListener('click', () => {
         state.useImageAssets = !state.useImageAssets;
