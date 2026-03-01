@@ -35,10 +35,11 @@ app.get("/api/user/profile", authMiddleware, (req, res) => {
 
 // Serve the browser-compatible (ESM/UMD) build of chess.js
 // node_modules/chess.js/dist/esm/chess.js is the browser-safe build
+// server.js update
 app.get('/vendor/chess.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'node_modules', 'chess.js', 'dist', 'esm', 'chess.js'));
+    // Look in the public folder instead of node_modules
+    res.sendFile(path.join(__dirname, 'public', 'vendor', 'chess.js'));
 });
-
 // Static files from /public
 app.use(express.static(path.join(__dirname, 'public')));
 
