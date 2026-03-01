@@ -33,14 +33,13 @@ app.get("/api/user/profile", authMiddleware, (req, res) => {
     res.json({ message: "Protected!", userId: req.user.id });
 });
 
-// ── Serve chess.js from node_modules as a browser global ─────
-// This avoids any bundler/transpiler touching it and converting
-// imports to require() calls.
+// Serve the browser-compatible (ESM/UMD) build of chess.js
+// node_modules/chess.js/dist/esm/chess.js is the browser-safe build
 app.get('/vendor/chess.js', (req, res) => {
-    res.sendFile(path.join(__dirname, 'node_modules', 'chess.js', 'dist', 'cjs', 'chess.js'));
+    res.sendFile(path.join(__dirname, 'node_modules', 'chess.js', 'dist', 'esm', 'chess.js'));
 });
 
-// ── Static files ─────────────────────────────────────────────
+// Static files from /public
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
@@ -51,7 +50,6 @@ app.get('/game', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'game.html'));
 });
 
-// Express 5 requires named wildcard parameter
 app.get('*path', (req, res) => {
     res.redirect('/');
 });
