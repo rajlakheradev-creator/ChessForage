@@ -1,19 +1,12 @@
 {
   "version": 2,
   "builds": [
-    { "src": "server.js", "use": "@vercel/node" },
-    { "src": "public/**", "use": "@vercel/static" }
+    { "src": "server.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "server.js" },
-    { "src": "/(css|js|images|assets|vendor)/(.*)", "dest": "/public/$1/$2" },
     { "src": "/game", "dest": "server.js" },
-    { "src": "/", "dest": "server.js" },
+    { "src": "/vendor/(.*)", "dest": "public/vendor/$1" },
     { "src": "/(.*)", "dest": "server.js" }
-  ],
-  "functions": {
-    "server.js": {
-      "includeFiles": "public/**"
-    }
-  }
+  ]
 }
