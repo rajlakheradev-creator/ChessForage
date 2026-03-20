@@ -4,7 +4,10 @@ const mongoose = require("mongoose");
 const path = require('path');
 const cors = require("cors");
 require("dotenv").config();
-
+console.log("ENV CHECK:", {
+    MONGO_URI: process.env.MONGO_URI ? "SET" : "MISSING",
+    JWT_SECRET: process.env.JWT_SECRET ? "SET" : "MISSING"
+});
 const app = express();
 const PORT = process.env.PORT || 5000;
 
