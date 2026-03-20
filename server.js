@@ -22,7 +22,7 @@ app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ MongoDB connected"))
-    .catch(err => { console.error("❌ MongoDB failed:", err.message); process.exit(1); });
+    .catch(err => console.error("❌ MongoDB connection error:", err.message));
 
 const authRoutes = require("./routes/auth");
 const authMiddleware = require("./middleware/authMiddleware");
