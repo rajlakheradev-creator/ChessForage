@@ -27,6 +27,10 @@ mongoose.connect(process.env.MONGO_URI)
 const authRoutes = require("./routes/auth");
 const authMiddleware = require("./middleware/authMiddleware");
 
+app.get('/home', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
 app.use("/api/auth", authRoutes);
 
 app.get("/api/user/profile", authMiddleware, (req, res) => {

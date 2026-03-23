@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChessForge - Home</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+
+<body>
+    <h1>Chess Forage</h1>
+
+    <div class="user-profile" style="text-align: center; margin-bottom: 15px;">
+        <span id="welcome-message" style="font-weight: bold; margin-right: 15px; color: azure;"></span>
+        <button id="logout-btn" type="button" style="background: #ff4757; color: white;">🚪 Logout</button>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+        <button onclick="window.location.href='game.html'" 
+                style="padding: 16px 40px; font-size: 20px; background: #ff6b00; 
+                       color: white; border: none; border-radius: 8px; cursor: pointer;">
+            ▶ Play Now
+        </button>
+    </div>
+
+    <script>
+        const token = localStorage.getItem("token");
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+        const userName = localStorage.getItem("userName") || "Player";
+        const welcomeSpan = document.getElementById("welcome-message");
+        if (welcomeSpan) welcomeSpan.textContent = `Welcome, ${userName}!`;
+
+        const logoutBtn = document.getElementById("logout-btn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", () => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("userName");
+                window.location.href = "login.html";
+            });
+        }
+    </script>
+</body>
+</html>

@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (res.ok) {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userName", data.name);
-                window.location.href = "game.html";
+                window.location.href = "home.html";
             } else {
                 showError(data.message || "Login failed. Please try again.");
             }
