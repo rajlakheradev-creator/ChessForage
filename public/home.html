@@ -4,25 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChessForge - Home</title>
-    <link rel="icon" type="image/svg+xml" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/home.css">
 </head>
 
 <body>
-    <h1>Chess Forage</h1>
-
-    <div class="user-profile" style="text-align: center; margin-bottom: 15px;">
-        <span id="welcome-message" style="font-weight: bold; margin-right: 15px; color: azure;"></span>
-        <button id="logout-btn" type="button" style="background: #ff4757; color: white;">🚪 Logout</button>
+    <div class="user-profile">
+        <span id="welcome-message"></span>
+        <button id="logout-btn" type="button">🚪 Logout</button>
     </div>
 
-    <div style="text-align: center; margin-top: 40px;">
-        <button onclick="window.location.href='game.html'" 
-                style="padding: 16px 40px; font-size: 20px; background: #ff6b00; 
-                       color: white; border: none; border-radius: 8px; cursor: pointer;">
+    <div class="home-card">
+        <h1>♟️ ChessForge</h1>
+        <p class="subtitle">Play, learn, and improve your chess game</p>
+
+        <button class="play-btn" onclick="window.location.href='game.html'">
             ▶ Play Now
         </button>
+
+        <div class="features">
+            <div class="feature-item">
+                <span>🤖</span>
+                Play vs Bot
+            </div>
+            <div class="feature-item">
+                <span>📜</span>
+                Move History
+            </div>
+            <div class="feature-item">
+                <span>🔊</span>
+                Sound FX
+            </div>
+            <div class="feature-item">
+                <span>🎨</span>
+                Custom Pieces
+            </div>
+        </div>
     </div>
 
     <script>

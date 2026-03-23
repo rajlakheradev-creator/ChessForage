@@ -1,0 +1,108 @@
+/* public/css/home.css */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: var(--Background);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    color: var(--Light);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 48px;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+}
+
+.subtitle {
+    color: var(--Dark-1);
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.user-profile {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#welcome-message {
+    color: azure;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+#logout-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#logout-btn:hover {
+    background: #ff6b81;
+}
+
+.home-card {
+    background: #1e1e2e;
+    border: 2px solid #333;
+    border-radius: 16px;
+    padding: 48px 64px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.play-btn {
+    display: inline-block;
+    padding: 18px 60px;
+    font-size: 22px;
+    font-weight: bold;
+    background: #ff6b00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+}
+
+.play-btn:hover {
+    background: #ff8800;
+    transform: scale(1.03);
+}
+
+.features {
+    display: flex;
+    gap: 24px;
+    margin-top: 36px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    background: #2a2a3e;
+    border-radius: 10px;
+    padding: 16px 20px;
+    color: #ccc;
+    font-size: 13px;
+    text-align: center;
+    width: 100px;
+}
+
+.feature-item span {
+    display: block;
+    font-size: 28px;
+    margin-bottom: 6px;
+}
