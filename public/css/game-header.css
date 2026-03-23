@@ -148,3 +148,17 @@
         width: 120px;
     }
 }
+
+/* Bot panel sits just below the header */
+#bot-panel {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 10px 24px;
+    background: #161616;
+    border-bottom: 2px solid #761616;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}

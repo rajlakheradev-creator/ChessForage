@@ -82,8 +82,8 @@ function buildBotPanel() {
     `;
 
     // Insert after the controls div
-    const controls = document.querySelector('.controls');
-    controls.insertAdjacentElement('afterend', panel);
+const header = document.querySelector('.game-header');
+header.insertAdjacentElement('afterend', panel);
 
     // ============================================================
     // Wire up mode buttons using event delegation on the group
