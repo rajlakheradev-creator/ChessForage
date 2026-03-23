@@ -228,3 +228,17 @@
         height: 200px;
     }
 }
+@media (max-width: 768px) {
+    #game-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #move-sidebar {
+        display: none;
+    }
+
+    :root {
+        --Square-Size: 42px;
+    }
+}
