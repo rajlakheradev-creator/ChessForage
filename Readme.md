@@ -13,7 +13,7 @@ ChessForage is a streamlined web application built on the Express.js framework, 
 🌐 Live Demo
 
 🚀 Play Now:
-👉 https://chessforage.onrender.com/game.html
+👉 https://chessforage.onrender.com
 
 
 ---
