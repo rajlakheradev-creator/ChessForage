@@ -59,7 +59,7 @@ app.get('/game', (req, res) => {
 });
 
 // Catch-all — must be last
-app.get('*', (req, res) => {
+app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
