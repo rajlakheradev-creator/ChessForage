@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChessForge</title>
     <link rel="icon" type="image/svg+xml" href="images/favicon.png">
+    <link rel="stylesheet" href="css/game-header.css">
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/board.css">
@@ -15,26 +16,35 @@
 </head>
 
 <body>
-    <h2>Chess Forage</h2>
+    <header class="game-header">
+        <div class="header-left">
+            <button id="change-img" type="button">🎨 Customize Pieces</button>
+            <button id="toggle-style-btn" type="button">Switch to Unicode</button>
+        </div>
 
-    <div class="user-profile" style="text-align: center; margin-bottom: 15px;">
-        <span id="welcome-message" style="font-weight: bold; margin-right: 15px; color: azure;"></span>
-        <button id="logout-btn" type="button" style="background: #ff4757; color: white;">🚪 Logout</button>
-    </div>
+        <div class="header-center">
+            <h1>♟️ ChessForge</h1>
+            <button onclick="window.location.href='home.html'" type="button" class="home-btn">🏠 Home</button>
+        </div>
 
-    <div class="controls">
-        <button id="change-img" type="button">🎨 Customize Pieces</button>
-        <button id="toggle-style-btn" type="button">Switch to Unicode</button>
-        <button id="reset-btn" type="button">Reset Game</button>
-        <button id="sound-toggle-btn" type="button">🔊 Sound ON</button>
-        <input type="range" id="volume-slider" min="0" max="100" value="50" title="Volume">
-        <button onclick="window.location.href='home.html'" type="button">🏠 Home</button>
+        <div class="header-right">
+            <button id="sound-toggle-btn" type="button">🔊 Sound ON</button>
+            <input type="range" id="volume-slider" min="0" max="100" value="50" title="Volume">
+            <button id="reset-btn" type="button">🔄 Reset Game</button>
+        </div>
+    </header>
+
+    <div class="user-profile">
+        <span id="welcome-message"></span>
+        <button id="logout-btn" type="button">🚪 Logout</button>
     </div>
 
     <div class="game-container">
         <div id="gameStatus">White to move</div>
         <div class="board" id="board"></div>
     </div>
+
+    <!-- rest of scripts unchanged -->
 
     <script type="module">
         import { Chess } from "/vendor/chess.js";
